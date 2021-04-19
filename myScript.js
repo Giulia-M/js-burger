@@ -22,23 +22,11 @@ buttonElement.addEventListener("click", function () {
 
 
     //lista di coupon
-    var couponList = ["CAK2836HDYC", "EJWYDH763HD", "JSHDSU454ID"]
-    
-    var couponUtente = document.getElementById("coupon");
-
-    var couponUtenteValue = couponUtente.value
-    var elementExist = false;
-
-
-    for (var j = 0; j < couponList.length; j++) {
-        var singleCoupon = couponList[j];
-        
-        if(singleCoupon === couponUtenteValue) {
-            elementExist = true;
-        }
-    }
-
-    priceBurger.textContent = amount;
+    var couponList = ["CAK2836HDYC", "EJWYDH763HD", "JSHDSU454ID"];
+  
+    var couponUtente = document.getElementById("coupon").value;
+    //invoco la funzione 
+    priceBurger.textContent = applyDiscount(couponUtente, couponList, amount, 0.2);
 
 })
 
@@ -59,22 +47,21 @@ function addIngredient(totalAmount, singleIngredient) {
 
 
 
-//funzione che mi dia come risultato il prezzo del burger in base allo sconto 
-function discountCoupon(voucherUtente, voucherList, esito, prezzoTotale) {
-    var esito;
-    var sconto;
-    var prezzoScontato = prezzoTotale - sconto;
-    
-    if(voucherList === voucherUtente) {
-        sconto = (prezzoTotale / 100) * 30;
-        esito = prezzoTotale - prezzoScontato;
-    } else {
-        esito = prezzoTotale
+//funzione che mi applica lo sconto del 20%
+function applyDiscount (couponClient, couponContainer, originalPrice, discount){
+   
+    var discountedPrice = originalPrice;
+
+    for (var j= 0; j<couponContainer.length; j++) {
+        
+        if(couponClient === couponContainer[j]){
+            discountedPrice = originalPrice * (1 - discount)
+        }
     }
 
-    return esito
-}
 
+    return discountedPrice.toFixed(2);
+}
 
 /*
 //è stato selezionato l'ingrediente? --> .checked
