@@ -57,15 +57,22 @@ function addIngredient(totalAmount, singleIngredient) {
 
 
 
+
+
 //funzione che mi dia come risultato il prezzo del burger in base allo sconto 
-function discountCoupon(voucherUtente, voucherList) {
+function discountCoupon(voucherUtente, voucherList, esito, prezzoTotale) {
     var esito;
-    var prezzoScontato = prezzoTotale - sconto
+    var sconto;
+    var prezzoScontato = prezzoTotale - sconto;
     
     if(voucherList === voucherUtente) {
-       
-        
+        sconto = (prezzoTotale / 100) * 30;
+        esito = prezzoTotale - prezzoScontato;
+    } else {
+        esito = prezzoTotale
     }
+
+    return esito
 }
 
 
